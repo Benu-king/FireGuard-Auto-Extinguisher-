@@ -2,8 +2,6 @@
 
 **Author:** Benayas Wondwosen
 
-**Platform:** Arduino (UNO / Nano)
-
 **Category:** Embedded Systems • Robotics • Safety Automation
 
 ---

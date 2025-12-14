@@ -1,0 +1,66 @@
+
+// powerd by benyas wondwosen
+#include <Servo.h>
+
+Servo fireServo;
+
+const int flamePin = A0;
+const int pumpPin  = 10;
+const int servoPin = 9;
+
+bool fireLocked = false;
+int fireAngle = 90;
+int angle = 0;
+
+const int FLAME_THRESHOLD = 500;
+
+void setup() {
+  Serial.begin(9600);
+  fireServo.attach(servoPin);
+  pinMode(pumpPin, OUTPUT);
+  digitalWrite(pumpPin, LOW);
+  fireServo.write(90);
+  delay(500);
+}
+
+void loop() {
+
+  if (!fireLocked) {
+    int bestValue = 1023;
+    int bestAngle = 90;
+
+    for (angle = 0; angle <= 150; angle += 2) {
+      fireServo.write(angle);
+      delay(30);
+
+      int flameValue = analogRead(flamePin);
+      if (flameValue < bestValue) {
+        bestValue = flameValue;
+        bestAngle = angle;
+      }
+    }
+
+    if (bestValue < FLAME_THRESHOLD) {
+      fireLocked = true;
+      fireAngle = bestAngle;
+      fireServo.write(fireAngle);
+      delay(300);
+    } else {
+      fireServo.write(90);
+    }
+  }
+
+  if (fireLocked) {
+    int flameValue = analogRead(flamePin);
+
+    if (flameValue < FLAME_THRESHOLD) {
+      fireServo.write(fireAngle);
+      digitalWrite(pumpPin, LOW);
+    } else {
+      digitalWrite(pumpPin, HIGH);
+      fireLocked = false;
+      fireServo.write(90);
+      delay(500);
+    }
+  }
+}

@@ -1,7 +1,9 @@
 # 🔥 FireGuard Auto Extinguisher
 
 **Author:** Benayas Wondwosen
+
 **Platform:** Arduino (UNO / Nano)
+
 **Category:** Embedded Systems • Robotics • Safety Automation
 
 ---
@@ -85,8 +87,8 @@ Feel free to fork this repository and submit pull requests.
 
 ## 📞 Contact
 
-**Author:** Benayas Wondwosen
-**Company:** Nafiyas Solution
+* **Author:** Benayas Wondwosen
+* **Company:** Nafiyas Solution
 
 ---
 
